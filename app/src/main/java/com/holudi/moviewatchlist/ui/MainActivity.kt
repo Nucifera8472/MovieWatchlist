@@ -31,12 +31,14 @@ import com.holudi.moviewatchlist.ui.theme.MovieWatchlistTheme
 import com.holudi.moviewatchlist.ui.watchlist.WatchlistScreen
 import com.holudi.moviewatchlist.utils.ConnectionState
 import com.holudi.moviewatchlist.utils.observeConnectivityAsFlow
+import dagger.hilt.android.AndroidEntryPoint
 
 private val bottomNavItems = listOf(
     BottomNavItem.Watchlist,
     BottomNavItem.Search,
 )
 
+@AndroidEntryPoint
 @OptIn(ExperimentalLifecycleComposeApi::class)
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
