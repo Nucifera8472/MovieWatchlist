@@ -69,6 +69,24 @@ class UserDataRepository @Inject constructor(@ApplicationContext val context: Co
         }
     }
 
+    suspend fun removeFromWatchlist(imdbId: String): Boolean {
+        return try {
+            context.dataStore.edit { preferences ->
+                val watchlistIds =
+                    (preferences[PreferencesKeys.WATCHLIST]?.toMutableSet()
+                        ?: emptySet()).toMutableSet()
+
+                if (watchlistIds.contains(imdbId)) {
+                    watchlistIds.remove(imdbId)
+                }
+                preferences[PreferencesKeys.WATCHLIST] = watchlistIds
+            }
+            true
+        } catch (e: Exception) {
+            false
+        }
+    }
+
     suspend fun setMediaIgnored(imdbId: String): Boolean {
         return try {
             context.dataStore.edit { preferences ->

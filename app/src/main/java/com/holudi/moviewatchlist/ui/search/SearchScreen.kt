@@ -9,6 +9,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -18,6 +19,7 @@ import androidx.navigation.NavHostController
 import com.holudi.moviewatchlist.R
 import com.holudi.moviewatchlist.data.Resource
 import com.holudi.moviewatchlist.ui.common.MediaItemView
+import com.holudi.moviewatchlist.ui.common.MediaListItem
 import com.holudi.moviewatchlist.ui.common.SearchView
 
 @OptIn(ExperimentalLifecycleComposeApi::class)
@@ -49,7 +51,11 @@ fun SearchScreen(
 
         when (searchResults.value) {
             is Resource.Error ->
-                Text(text = "Something went wrong, please try again")
+                Text(
+                    text = stringResource(R.string.something_went_wrong),
+                    modifier = Modifier.padding(horizontal = 16.dp),
+                    color = Color.Red
+                )
             is Resource.Success -> {
                 val data = (searchResults.value as Resource.Success<List<MediaListItem>>).data
                 LazyColumn(
@@ -65,7 +71,11 @@ fun SearchScreen(
                 }
             }
             null -> {
-                Text(text = "Type more text to search OMDB")
+                Text(
+                    text = stringResource(R.string.empty_search),
+                    modifier = Modifier.padding(horizontal = 16.dp),
+                    color = Color.Gray
+                )
             }
         }
     }

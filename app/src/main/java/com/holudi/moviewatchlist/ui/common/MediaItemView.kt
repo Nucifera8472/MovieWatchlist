@@ -15,7 +15,6 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.holudi.moviewatchlist.R
 import com.holudi.moviewatchlist.data.model.Media
-import com.holudi.moviewatchlist.ui.search.MediaListItem
 
 @Composable
 fun MediaItemView(

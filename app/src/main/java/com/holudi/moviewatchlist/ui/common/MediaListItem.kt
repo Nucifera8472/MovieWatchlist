@@ -1,4 +1,4 @@
-package com.holudi.moviewatchlist.ui.search
+package com.holudi.moviewatchlist.ui.common
 
 import com.holudi.moviewatchlist.data.model.Media
 

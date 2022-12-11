@@ -6,6 +6,7 @@ import com.holudi.moviewatchlist.data.Resource
 import com.holudi.moviewatchlist.data.local.UserDataRepository
 import com.holudi.moviewatchlist.data.manager.MediaRepository
 import com.holudi.moviewatchlist.data.model.Media
+import com.holudi.moviewatchlist.ui.common.MediaListItem
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
