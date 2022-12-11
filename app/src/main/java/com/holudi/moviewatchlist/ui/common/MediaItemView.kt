@@ -9,6 +9,7 @@ import androidx.compose.material.icons.rounded.BookmarkBorder
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -44,9 +45,9 @@ fun MediaItemView(
                     .padding(8.dp)
             ) {
                 Text(text = mediaItem.media.title, style = MaterialTheme.typography.body1)
-                Text(text = mediaItem.media.year, style = MaterialTheme.typography.body2)
+                Text(text = mediaItem.media.year, style = MaterialTheme.typography.body2, color = Color.Gray)
                 mediaItem.media.imdbRating?.let {
-                    Text(text = mediaItem.media.imdbRating, style = MaterialTheme.typography.body2)
+                    Text(text = "${stringResource(id = R.string.rating)} ${mediaItem.media.imdbRating}", style = MaterialTheme.typography.body2, color = Color.Gray)
                 }
             }
 
@@ -61,14 +62,16 @@ fun MediaItemView(
                             imageVector = Icons.Rounded.Bookmark,
                             contentDescription = stringResource(
                                 id = R.string.remove_from_watchlist
-                            )
+                            ),
+                            tint = MaterialTheme.colors.primary
                         )
                     } else {
                         Icon(
                             imageVector = Icons.Rounded.BookmarkBorder,
                             contentDescription = stringResource(
                                 id = R.string.add_to_watchlist
-                            )
+                            ),
+                            tint = MaterialTheme.colors.primary
                         )
                     }
                 }
@@ -76,7 +79,8 @@ fun MediaItemView(
                     Icon(
                         imageVector = Icons.Rounded.Block, contentDescription = stringResource(
                             id = R.string.ignore
-                        )
+                        ),
+                        tint = MaterialTheme.colors.primary
                     )
                 }
             }
