@@ -16,6 +16,7 @@ import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import com.holudi.moviewatchlist.R
+import com.holudi.moviewatchlist.data.Resource
 import com.holudi.moviewatchlist.ui.common.MediaItemView
 import com.holudi.moviewatchlist.ui.common.SearchView
 
@@ -46,13 +47,25 @@ fun SearchScreen(
             onClearClicked = { viewModel.searchQuery.value = "" })
         Spacer(modifier = Modifier.height(16.dp))
 
-        searchResults.value?.data?.let { list ->
-            LazyColumn(
-                modifier = Modifier.weight(1f),
-            ) {
-                items(items = list, key = { item -> item.imdbID }) { media ->
-                    MediaItemView(media = media)
+        when (searchResults.value) {
+            is Resource.Error ->
+                Text(text = "Something went wrong, please try again")
+            is Resource.Success -> {
+                val data = (searchResults.value as Resource.Success<List<MediaListItem>>).data
+                LazyColumn(
+                    modifier = Modifier.weight(1f),
+                ) {
+                    items(items = data, key = { item -> item.media.imdbID }) { mediaItem ->
+                        MediaItemView(mediaItem = mediaItem, toggleWatchlist = {
+                            viewModel.toggleWatchlist(it)
+                        }, ignoreMedia = {
+                            viewModel.ignoreMedia(it)
+                        })
+                    }
                 }
+            }
+            null -> {
+                Text(text = "Type more text to search OMDB")
             }
         }
     }

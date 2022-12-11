@@ -18,7 +18,7 @@ interface OmdbApi {
     @Serializable
     data class SearchResponse(
         @SerialName("Search")
-        var searchResults: List<Media>
+        var searchResults: List<Media>? = null
     )
 
 }
