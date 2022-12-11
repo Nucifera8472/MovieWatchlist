@@ -9,5 +9,6 @@
     <string name="empty_watchlist">Wow, such empty! Search for your favorite movies or shows and add them to your watchlist!</string>
     <string name="something_went_wrong">Something went wrong, please try again</string>
     <string name="empty_search">Type more text to search OMDB</string>
+    <string name="close">Close</string>
     <string name="rating">Rating</string>
 </resources>

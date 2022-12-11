@@ -18,6 +18,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import com.holudi.moviewatchlist.R
 import com.holudi.moviewatchlist.data.Resource
+import com.holudi.moviewatchlist.ui.common.DetailView
 import com.holudi.moviewatchlist.ui.common.MediaItemView
 import com.holudi.moviewatchlist.ui.common.MediaListItem
 import com.holudi.moviewatchlist.ui.common.SearchView
@@ -30,7 +31,6 @@ fun SearchScreen(
 ) {
     val searchText = viewModel.searchQuery.collectAsStateWithLifecycle()
     val searchInProgress = viewModel.searchInProgress.collectAsStateWithLifecycle()
-
     val searchResults = viewModel.mediaFlow.collectAsStateWithLifecycle(initialValue = null)
 
     if (searchInProgress.value)
@@ -66,7 +66,10 @@ fun SearchScreen(
                             viewModel.toggleWatchlist(it)
                         }, ignoreMedia = {
                             viewModel.ignoreMedia(it)
-                        })
+                        }, onItemClicked = {
+                            viewModel.selectedItem.value = it
+                        }
+                        )
                     }
                 }
             }
@@ -77,6 +80,12 @@ fun SearchScreen(
                     color = Color.Gray
                 )
             }
+        }
+    }
+
+    viewModel.selectedItem.value?.let {
+        DetailView(media = it) {
+            viewModel.selectedItem.value = null
         }
     }
 }

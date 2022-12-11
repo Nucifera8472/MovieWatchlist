@@ -20,6 +20,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import com.holudi.moviewatchlist.R
 import com.holudi.moviewatchlist.data.Resource
+import com.holudi.moviewatchlist.ui.common.DetailView
 import com.holudi.moviewatchlist.ui.common.MediaItemView
 import com.holudi.moviewatchlist.ui.common.MediaListItem
 
@@ -69,6 +70,8 @@ fun WatchlistScreen(
                                 viewModel.toggleWatchlist(it)
                             }, ignoreMedia = {
                                 viewModel.ignoreMedia(it)
+                            }, onItemClicked = {
+                                viewModel.selectedItem.value = it
                             })
                         }
                     }
@@ -76,6 +79,11 @@ fun WatchlistScreen(
             }
             null -> {
             }
+        }
+    }
+    viewModel.selectedItem.value?.let {
+        DetailView(media = it) {
+            viewModel.selectedItem.value = null
         }
     }
 }

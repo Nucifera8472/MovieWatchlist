@@ -1,5 +1,6 @@
 package com.holudi.moviewatchlist.ui.watchlist
 
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.holudi.moviewatchlist.data.Resource
@@ -24,6 +25,7 @@ class WatchlistViewModel @Inject constructor(
 ) :
     ViewModel() {
 
+    var selectedItem = mutableStateOf<Media?>(null)
     val fetchInProgress = MutableStateFlow(false)
 
     val mediaFlow: Flow<Resource<List<MediaListItem>>> = userDataRepository.watchlistIdsFlow()

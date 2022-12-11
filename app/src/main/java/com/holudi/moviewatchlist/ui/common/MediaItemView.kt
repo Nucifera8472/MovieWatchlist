@@ -1,5 +1,6 @@
 package com.holudi.moviewatchlist.ui.common
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -21,10 +22,13 @@ import com.holudi.moviewatchlist.data.model.Media
 fun MediaItemView(
     mediaItem: MediaListItem,
     toggleWatchlist: (Media) -> Unit,
-    ignoreMedia: (Media) -> Unit
+    ignoreMedia: (Media) -> Unit,
+    onItemClicked: (Media) -> Unit
 ) {
     Column(
-        modifier = Modifier
+        modifier = Modifier.clickable {
+            onItemClicked(mediaItem.media)
+        }
     ) {
         Row(
             modifier = Modifier
@@ -103,6 +107,7 @@ fun MediaItemViewPreview() {
                 "https://m.media-amazon.com/images/M/MV5BOWFlOWE1OGEtOTVlMi00M2JmLWJlMGEtOWVjOGFhOTNlYTZiXkEyXkFqcGdeQXVyMTEyMjM2NDc2._V1_SX300.jpg"
             ), false
         ),
+        {},
         {},
         {}
     )
